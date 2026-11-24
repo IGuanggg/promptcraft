@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PromptCraft · AI 视觉提示词工作台</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">◈</span>
+    <span>PromptCraft</span>
+    <em>AI 视觉提示词工作台</em>
+  </div>
+  <div class="status" id="status">就绪</div>
+</header>
+
+<main>
+  <section class="panel controls">
+    <h2>1 · 设定画面要素</h2>
+
+    <div class="field">
+      <label for="subject">主体</label>
+      <input id="subject" type="text" placeholder="例如：穿汉服的少女站在雨后的青石巷" value="穿汉服的少女站在雨后的青石巷" />
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label for="style">风格</label>
+        <select id="style">
+          <option value="cinematic photo">cinematic photo</option>
+          <option value="ink wash painting">ink wash painting</option>
+          <option value="3d render, octane">3d render, octane</option>
+          <option value="anime key visual">anime key visual</option>
+          <option value="editorial fashion shot">editorial fashion shot</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="light">光照</label>
+        <select id="light">
+          <option value="soft rim light, overcast">soft rim light, overcast</option>
+          <option value="golden hour backlight">golden hour backlight</option>
+          <option value="neon night, wet reflections">neon night, wet reflections</option>
+          <option value="studio three point light">studio three point light</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label for="lens">镜头 / 画幅</label>
+        <select id="lens">
+          <option value="35mm, f/1.8, medium shot">35mm · f/1.8 · 中景</option>
+          <option value="85mm, f/1.4, close-up">85mm · f/1.4 · 特写</option>
+          <option value="24mm wide angle, full body">24mm 广角 · 全身</option>
+          <option value="macro detail shot">微距细节</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ratio">比例</label>
+        <select id="ratio">
+          <option value="16:9">16:9 横版</option>
+          <option value="9:16">9:16 竖版</option>
+          <option value="4:3">4:3</option>
+          <option value="1:1">1:1</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="extra">补充约束<span class="hint">选填，逗号分隔</span></label>
+      <input id="extra" type="text" placeholder="例如：雾气、胶片颗粒、低饱和" />
+    </div>
+
+    <div class="presets">
+      <span>快速预设</span>
+      <button class="chip" data-preset="portrait">人像写真</button>
+      <button class="chip" data-preset="product">产品棚拍</button>
+      <button class="chip" data-preset="scene">场景概念</button>
+      <button class="chip" data-preset="poster">海报主视觉</button>
+    </div>
+  </section>
+
+  <section class="panel output">
+    <h2>2 · 生成结果</h2>
+
+    <div class="box">
+      <div class="box-head">
+        <span>中文描述</span>
+        <button class="copy" data-target="outZh">复制</button>
+      </div>
+      <pre id="outZh"></pre>
+    </div>
+
+    <div class="box">
+      <div class="box-head">
+        <span>English Prompt</span>
+        <button class="copy" data-target="outEn">复制</button>
+      </div>
+      <pre id="outEn"></pre>
+    </div>
+
+    <div class="box negative">
+      <div class="box-head">
+        <span>负向提示词</span>
+        <button class="copy" data-target="outNeg">复制</button>
+      </div>
+      <pre id="outNeg"></pre>
+    </div>
+
+    <div class="meta">
+      <span>字符数 <b id="lenZh">0</b></span>
+      <span>词条 <b id="lenTokens">0</b></span>
+      <span>预计耗时 <b id="eta">—</b></span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>本地运行 · 不联网 · 无数据上传</span>
+  <span>PromptCraft v1.0</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
