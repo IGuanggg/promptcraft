@@ -23,12 +23,23 @@ PromptCraft 把这件事做成表单：选完六项，中英双语提示词和�
 
 ```
 promptcraft/
-├── index.html    语义化结构 + 表单控件
-├── style.css     深色界面、响应式双栏布局
-└── app.js        表单读取 → 提示词拼装 → 剪贴板
+├── index.html        语义化结构 + 表单控件
+├── style.css         深色界面、响应式双栏布局
+├── app.js            DOM 绑定：读表单、渲染、剪贴板
+├── lib/prompt.js     提示词拼装核心（UMD-lite，浏览器与 Node 共用）
+├── tests/            node --test 单测
+└── docs/             作品详情文档
 ```
 
-提示词拼装是纯函数（`buildZh` / `buildEn`），与 DOM 分离，便于单测和复用。剪贴板优先走 `navigator.clipboard`，非安全上下文（`file://`）降级到 `execCommand`。
+拼装逻辑全部放在 `lib/prompt.js`：`buildZh` / `buildEn` 接收表单对象、返回字符串，不碰 DOM。同一份文件浏览器挂到 `window.PromptLib`，Node 用 `require` 加载，所以单测跑的是线上那份代码，不是副本。
+
+剪贴板优先走 `navigator.clipboard`，非安全上下文（`file://`）降级到 `execCommand`，保证双击打开时复制按钮也不失效。
+
+## 测试
+
+```bash
+npm test        # node --test，9 个用例覆盖拼装顺序、空字段、比例参数、词条统计
+```
 
 ## 本地运行
 
