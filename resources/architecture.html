@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0b0d12;
+    color: #e8ecf3;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    padding: 56px 64px;
+  }
+  h1 { font-size: 26px; font-weight: 650; letter-spacing: 0.02em; margin-bottom: 8px; }
+  h1 span { color: #6c8cff; }
+  .sub { font-size: 13.5px; color: #8d97a8; margin-bottom: 40px; }
+
+  .row { display: flex; gap: 20px; align-items: stretch; margin-bottom: 20px; }
+  .node {
+    flex: 1;
+    border: 1px solid #232833;
+    border-radius: 12px;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.028);
+  }
+  .node .tag {
+    font-size: 11px;
+    color: #6c8cff;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .node .name { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .node .desc { font-size: 12.5px; color: #8d97a8; line-height: 1.6; }
+
+  .arrow { display: flex; align-items: center; color: #39405a; font-size: 20px; }
+
+  .stack { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .stack .node { flex: none; }
+
+  .flow {
+    border: 1px solid #232833;
+    border-radius: 12px;
+    padding: 20px 24px;
+    background: rgba(108,140,255,0.045);
+    margin-top: 8px;
+  }
+  .flow .head { font-size: 12px; color: #6ee7c8; letter-spacing: 0.1em; margin-bottom: 14px; }
+  .steps { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .step {
+    font-size: 12.5px;
+    border: 1px solid #2d3446;
+    background: #0e1117;
+    padding: 9px 14px;
+    border-radius: 8px;
+    color: #cdd6e6;
+  }
+  .step b { color: #6c8cff; margin-right: 6px; font-weight: 600; }
+  .sep { color: #39405a; }
+  footer { margin-top: 26px; font-size: 11.5px; color: #4f5768; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+  <h1>PromptCraft <span>系统架构</span></h1>
+  <div class="sub">纯静态三文件结构 · 无框架 · 无构建 · 无后端</div>
+
+  <div class="row">
+    <div class="stack">
+      <div class="node">
+        <div class="tag">View</div>
+        <div class="name">index.html</div>
+        <div class="desc">语义化结构与表单控件<br />六维输入 · 三段输出区</div>
+      </div>
+      <div class="node">
+        <div class="tag">Style</div>
+        <div class="name">style.css</div>
+        <div class="desc">深色主题 · 响应式双栏<br />900px 断点转单栏</div>
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="node" style="flex:1.4">
+      <div class="tag">Controller / Logic</div>
+      <div class="name">app.js</div>
+      <div class="desc">
+        readForm() 读取表单状态<br />
+        buildZh() / buildEn() 纯函数拼装提示词<br />
+        render() 写回 DOM 与统计<br />
+        copyText() 剪贴板 · clipboard → execCommand 降级
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="stack">
+      <div class="node">
+        <div class="tag">Output</div>
+        <div class="name">中文描述</div>
+        <div class="desc">沟通对齐用，带画幅说明</div>
+      </div>
+      <div class="node">
+        <div class="tag">Output</div>
+        <div class="name">English Prompt</div>
+        <div class="desc">带 --ar 比例参数，直投模型</div>
+      </div>
+      <div class="node">
+        <div class="tag">Output</div>
+        <div class="name">负向提示词</div>
+        <div class="desc">内置通用负向词库</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="head">用户操作流</div>
+    <div class="steps">
+      <div class="step"><b>1</b>选择预设或直接填写</div>
+      <div class="sep">→</div>
+      <div class="step"><b>2</b>input / change 事件触发</div>
+      <div class="sep">→</div>
+      <div class="step"><b>3</b>纯函数拼装英文与中文</div>
+      <div class="sep">→</div>
+      <div class="step"><b>4</b>渲染结果并更新统计</div>
+      <div class="sep">→</div>
+      <div class="step"><b>5</b>一键复制到剪贴板</div>
+    </div>
+  </div>
+
+  <footer>
+    <span>无网络请求 · 数据不出本机 · 可离线运行</span>
+    <span>PromptCraft v1.0</span>
+  </footer>
+</body>
+</html>
